@@ -1,0 +1,17 @@
+# Server configuration
+server:
+  applicationConnectors:
+    - type: http
+      port: 8080
+  adminConnectors:
+    - type: http
+      port: 8081
+
+# Application-specific configuration
+logging:
+  level: INFO
+  loggers:
+    org.example.app: DEBUG
+  appenders:
+    - type: console
+      logFormat: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
