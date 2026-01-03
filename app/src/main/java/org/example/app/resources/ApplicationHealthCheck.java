@@ -1,4 +1,4 @@
-package org.example.app.health;
+package org.example.app.resources;
 
 import com.codahale.metrics.health.HealthCheck;
 
@@ -11,5 +11,3 @@ public class ApplicationHealthCheck extends HealthCheck {
         return Result.healthy("Application is running");
     }
 }
-
-

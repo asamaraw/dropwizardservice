@@ -3,7 +3,8 @@ package org.example.app;
 import io.dropwizard.core.Application;
 import io.dropwizard.core.setup.Bootstrap;
 import io.dropwizard.core.setup.Environment;
-import org.example.app.health.ApplicationHealthCheck;
+import org.example.app.metrics.ApplicationMetrics;
+import org.example.app.resources.ApplicationHealthCheck;
 import org.example.app.resources.VersionResource;
 
 public class App extends Application<AppConfiguration> {
@@ -23,8 +24,11 @@ public class App extends Application<AppConfiguration> {
 
     @Override
     public void run(AppConfiguration configuration, Environment environment) {
-        // Register resources
-        environment.jersey().register(new VersionResource());
+        // Initialize metrics
+        ApplicationMetrics metrics = new ApplicationMetrics(environment.metrics());
+        
+        // Register resources with metrics
+        environment.jersey().register(new VersionResource(metrics));
         
         // Register health checks
         environment.healthChecks().register("application", new ApplicationHealthCheck());
