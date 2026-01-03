@@ -12,3 +12,4 @@ public class ApplicationHealthCheck extends HealthCheck {
     }
 }
 
+

@@ -11,6 +11,12 @@ subprojects {
         mavenCentral()
     }
     
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+    }
+    
     dependencies {
         // Common dependencies for all subprojects can go here
     }
