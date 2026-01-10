@@ -5,6 +5,7 @@ import io.dropwizard.core.setup.Bootstrap;
 import io.dropwizard.core.setup.Environment;
 import org.example.app.metrics.ApplicationMetrics;
 import org.example.app.resources.ApplicationHealthCheck;
+import org.example.app.resources.HelloResource;
 import org.example.app.resources.VersionResource;
 
 public class App extends Application<AppConfiguration> {
@@ -27,8 +28,9 @@ public class App extends Application<AppConfiguration> {
         // Initialize metrics
         ApplicationMetrics metrics = new ApplicationMetrics(environment.metrics());
         
-        // Register resources with metrics
-        environment.jersey().register(new VersionResource(metrics));
+        // Register resources with metrics and configuration
+        environment.jersey().register(new VersionResource(metrics, configuration));
+        environment.jersey().register(new HelloResource());
         
         // Register health checks
         environment.healthChecks().register("application", new ApplicationHealthCheck());

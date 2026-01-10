@@ -8,6 +8,9 @@ server:
       port: 8081
 
 # Application-specific configuration
+app:
+  revision: "0000"
+
 logging:
   level: INFO
   loggers:

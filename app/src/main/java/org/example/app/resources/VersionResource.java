@@ -4,6 +4,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import org.example.app.AppConfiguration;
 import org.example.app.metrics.ApplicationMetrics;
 import com.codahale.metrics.Timer;
 
@@ -12,9 +13,11 @@ import com.codahale.metrics.Timer;
 public class VersionResource {
     
     private final ApplicationMetrics metrics;
+    private final AppConfiguration configuration;
     
-    public VersionResource(ApplicationMetrics metrics) {
+    public VersionResource(ApplicationMetrics metrics, AppConfiguration configuration) {
         this.metrics = metrics;
+        this.configuration = configuration;
     }
     
     @GET
@@ -30,7 +33,7 @@ public class VersionResource {
             // Increment version-specific counter
             metrics.getVersionRequestsCounter().inc();
             
-            return "0.1.0";
+            return configuration.getApp().getRevision();
         }
     }
 }
